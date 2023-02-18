@@ -133,3 +133,34 @@ function update() {
   // call the update() function again in the next frame
   requestAnimationFrame(update);
 }
+
+// define a function to reset the pellets
+function resetPellets() {
+  // remove all pellets from the array
+  pellets = [];
+
+  // recreate the pellets in their original positions
+  for (let i = 0; i < maze.length; i++) {
+    for (let j = 0; j < maze[i].length; j++) {
+      if (maze[i][j] === 0) {
+        pellets.push({
+          x: j * TILE_SIZE + TILE_SIZE / 2,
+          y: i * TILE_SIZE + TILE_SIZE / 2,
+          radius: TILE_SIZE / 10,
+        });
+      }
+    }
+  }
+}
+
+// define a function to handle key events
+function keydown(e) {
+  // handle the "c" key to clear the pellets
+  if (e.code === "KeyC") {
+    resetPellets();
+  }
+}
+
+// add an event listener to the document to handle key events
+document.addEventListener("keydown", handleKeyDown);
+
