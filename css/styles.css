@@ -1,0 +1,28 @@
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  height: 300px;
+}
+
+.hole {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mole {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: brown;
+  border-radius: 50%;
+  display: none;
+}
+
+.up .mole {
+  display: block;
+}
