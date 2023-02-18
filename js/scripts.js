@@ -192,3 +192,53 @@ let ghosts = [
   }
 ];
 
+// define a function to draw the ghosts
+function drawGhosts() {
+  ghosts.forEach((ghost) => {
+    constext.beginPath();
+    context.fillStyle = ghost.color;
+    context.arc(ghost.x, ghost.y, TILE_SIZE / 2, 0, 2 * Math.PI);
+    context.fill();
+    context.clostPath();
+  });
+}
+
+function draw() {
+  // clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // draw the maze and pellets
+  drawMaze();
+  drawPellets();
+
+  // draw Pac-Man
+  drawPacman();
+
+  // draw the ghosts
+  if (showGhosts) {
+    drawGhosts();
+  }
+
+  // update the ghost positions
+  ghosts.forEach((ghost) => {
+    if (ghost.direction === "left") {
+      ghost.x -= 1;
+    } else if (ghost.direction === "right") {
+      ghost.x += 1;
+    } else if (ghost.direction === "up") {
+      ghost.y -= 1;
+    } else if (ghost.direction === "down") {
+      ghost.y += 1;
+    }
+  });
+
+  // request the next animation frame
+  requestAnimationFrame(draw);
+}
+
+// update the handleKeyDown() function to toggle ghosts on/off
+function handleKeyDown(e) {
+  if (e.code === "KeyG") {
+    showGhosts = !showGhosts;
+  }
+}
