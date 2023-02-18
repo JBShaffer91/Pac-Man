@@ -242,3 +242,79 @@ function handleKeyDown(e) {
     showGhosts = !showGhosts;
   }
 }
+
+// implement scoring
+let score = 0;
+
+// modify the drawPellets() function to draw the score
+function drawPellets() {
+  // loop through all of the pellets
+  for (let i = 0; i < pellets.length; i++) {
+    const pellet = pellets[i];
+
+    // check for a collision
+    if (collides(pacman, pellet)) {
+      // increment the score and remove the pellet
+      score += 10;
+      pellets.splice(i, 1);
+      i--;
+    } else {
+      // draw the pellet
+      context.beginPath();
+      context.fillStyle = "white";
+      context.arc(
+        pellet.x + TILE_SIZE / 2,
+        pellet.y + TILE_SIZE / 2,
+        TILE_SIZE / 10,
+        0,
+        2 * Math.PI
+      );
+      context.fill();
+      context.closePath();
+    }
+  }
+}
+
+// define a function to draw the score
+function drawScore() {
+  context.font = "24px Arial";
+  context.fillStyle = "white";
+  context.fillText("Score: " + score, 10, canvas.height - 10);
+}
+
+// call 'drawScore()' in the 'draw()' function
+function draw() {
+  // clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // draw the maze and pellets
+  drawMaze();
+  drawPellets();
+
+  // draw Pac-Man
+  drawPacman();
+
+  // draw the ghosts
+  if (showGhosts) {
+    drawGhosts();
+  }
+
+  // draw the score
+  drawScore();
+
+  // update the ghost positions
+  ghosts.forEach((ghost) => {
+    if (ghost.direction === "left") {
+      ghost.x -= 1;
+    } else if (ghost.direction === "right") {
+      ghost.x += 1;
+    } else if (ghost.direction === "up") {
+      ghost.y -= 1;
+    } else if (ghost.direction === "down") {
+      ghost.y += 1;
+    }
+  });
+
+  // request the next animation frame
+  requestAnimationFrame(draw);
+}
