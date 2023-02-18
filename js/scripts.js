@@ -164,3 +164,31 @@ function keydown(e) {
 // add an event listener to the document to handle key events
 document.addEventListener("keydown", handleKeyDown);
 
+// create ghosts
+let ghosts = [
+  {
+    x: 9 * TILE_SIZE + TILE_SIZE / 2,
+    y: 8 * TILE_SIZE + TILE_SIZE / 2,
+    direction: "left",
+    color: "red",
+  },
+  {
+    x: 9 * TILE_SIZE + TILE_SIZE / 2,
+    y: 7 * TILE_SIZE + TILE_SIZE / 2,
+    direction: "right",
+    color: "pink",
+  },
+  {
+    x: 10 * TILE_SIZE + TILE_SIZE / 2,
+    y: 8 * TILE_SIZE + TILE_SIZE / 2,
+    direction: "up",
+    color: "cyan",
+  },
+  {
+    x: 8 * TILE_SIZE + TILE_SIZE / 2,
+    y: 8 * TILE_SIZE + TILE_SIZE / 2,
+    direction: "down",
+    color: "orange",
+  }
+];
+
