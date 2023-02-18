@@ -80,3 +80,56 @@ function drawPacman() {
 
 // draw Pac-Man to the canvas
 drawPacman();
+
+// define a function to check for collisions
+function checkCollision(pacman, pellet) {
+  // calculate the distance between Pac-Man and the pellet
+  const dx = pacman.x - pellet.x;
+  const dy = pacman.y - pellet.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  // check if the distance between Pac-Man and the pellet is less than the sum of their radii
+  if (distance < pacman.radius + pellet.radius) {
+  return true; // collision
+  } else {
+  return false; // no collision
+  }
+}
+
+// define a function to remove a pellet from the pellets array
+function removePellet(pellet) {
+  const index = pellets.indexOf(pellet);
+  pellets.splice(index, 1);
+}
+
+// define a function to update the game
+function update() {
+  // check for collision
+  for (let i = 0; i < pellets.length; i++) {
+    const pellet = pellets[i];
+    if (checkCollision(pacman, pellet)) {
+      removePellet(pellet);
+      score++;
+    }
+  }
+
+  // move Pac-Man in the current direction
+  if (pacman.direction === "right") {
+  pacman.x += pacman.speed;
+  } else if (pacman.direction === "left") {
+  pacman.x -= pacman.speed;
+  } else if (pacman.direction === "up") {
+  pacman.y -= pacman.speed;
+  } else if (pacman.direction === "down") {
+  pacman.y += pacman.speed;
+  }
+
+  // redraw the game
+  drawMaze();
+  drawPellets();
+  drawPacman();
+  drawScore();
+
+  // call the update() function again in the next frame
+  requestAnimationFrame(update);
+}
