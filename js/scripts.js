@@ -24,11 +24,11 @@ for (let i =0; i < maze.length; i++) {
   for (let j = 0; j < maze[i].length; j++) {
     if (maze[i][j] === 1) {
       // draw the wall tile
-      ctx fillStyle - "blue";
+      ctx. fillStyle = "blue";
       ctx.fillRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     } else {
       // draw the floor tile
-      ctx fillStyle - "black";
+      ctx. fillStyle - "black";
       ctx.fillRect(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
   }
